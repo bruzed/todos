@@ -1,0 +1,245 @@
+FORMAT: 1A
+HOST: http://todos.apiblueprint.org/
+
+# ToDos API
+
+Simple API to track ToDo's!
+
+## Endpoints
+
+| URL | Method | Value |
+|---|---|---|
+| `/todos` | `GET` | Returns a list of all ToDo's |
+| `/todos/{id}` | `GET` | Get a single ToDo |
+| `/todos/{id}` | `POST` | Create a new ToDo |
+| `/todos/{id}` | `PUT` | Update a ToDo |
+| `/todos/{id}` | `DELETE` | Delete a ToDo |
+
+## Status Codes
+
+| Code | Description |
+|---|---|
+| `200` | Successfully returned/updated ToDo/s (GET/PUT) |
+| `201` | Successfully created a new ToDo (POST) |
+| `200` | Successfully deleted a ToDo (DELETE) |
+| `400` | Invalid request |
+| `404` | ToDo not found |
+| `500` | Internal server error |
+| `503` | Service unavailable |
+
+## ToDo's [/todos/{?sort,order,limit,page}]
+
+---
+
+Get a list of all ToDo's.
+
+#### Parameters
+
+| Name | Type | Options | Default | Value |
+|---|---|---|---|---|
+| `sort` | string | `date` `status` `priority` | `date` | Return results sorted by field |
+| `order` | string | `asc` `desc` | `desc` | Return results in ascending or descending order |
+| `limit` | integer | | `10` | Number of items to return on a page |
+| `page` | integer |  | `1` | Page number of results to return |
+
+#### Pagination Response Headers
+
+| Header | Value |
+|---|---|
+| `X-Pagination-Page` | Current page |
+| `X-Pagination-Limit` | Number of items per page |
+| `X-Pagination-Count` | Total number of pages |
+| `X-Pagination-Items` | Total number of items |
+
++ Parameters
+    + sort (optional, string, `date`) ... Fields to sort by
+        + Values
+            + `date` 
+            + `status`
+            + `priority`
+    + order (optional, string, `desc`) ... Return items in ascending or descending order
+        + Values
+            + `asc`
+            + `desc`
+    + limit (optional, number, `10`) ... Number of items per page
+    + page (optional, number, `1`) ... Page number
+
+### Get ToDo's [GET]
+
+Returns a list of ToDo's.
+
++ Response 200
+
+    + Headers
+        
+            Content-Type: application/json
+            X-Pagination-Page: 1
+            X-Pagination-Limit: 10
+            X-Pagination-Count: 5
+            X-Pagination-Items: 50
+
+    + Body
+
+            [
+                {
+                    "id": 0,
+                    "description": "Create a list of todo's",
+                    "created_at": "2016-11-17T10:03:20.342Z",
+                    "is_complete": false,
+                    "completed_at": "2016-11-17T15:03:20.342Z",
+                    "priority": "low",
+                    "remind_at_time": "2016-11-17T13:03:20.342Z",
+                    "remind_at_location": {
+                        "lat": 33.3632256,
+                        "lng": -117.0874871
+                    }
+                },
+                {
+                    "id": 1,
+                    "description": "This thing needs to be done",
+                    "created_at": "2016-11-17T11:03:20.342Z",
+                    "is_complete": false,
+                    "completed_at": "",
+                    "priority": "medium",
+                    "remind_at_time": "2016-11-17T13:03:20.342Z",
+                    "remind_at_location": {
+                        "lat": 33.3632256,
+                        "lng": -117.0874871
+                    }
+                },
+                {
+                    "id": 2,
+                    "description": "Create another thing to do",
+                    "created_at": "2016-11-18T10:03:20.342Z",
+                    "is_complete": false,
+                    "completed_at": "",
+                    "priority": "high",
+                    "remind_at_time": "2016-11-18T09:03:20.342Z",
+                    "remind_at_location": {
+                        "lat": 33.3632256,
+                        "lng": -117.0874871
+                    }
+                }
+            ]
+
+## ToDo [/todos/{id}]
+
+---
+
+Get, add, update, delete ToDo's.
+
+#### Parameters
+
+| Name | Type | Value |
+|---|---|---|---|---|
+| `id` | integer | ID of the ToDo |
+
++ Parameters
+    + id (required, number, `0`) ... ToDo id
+
+### Get a ToDo [GET]
+
+Get a ToDo.
+
++ Response 200 (application/json)
+
+    + Body
+
+            [
+                {
+                    "id": 0,
+                    "description": "Create a list of todo's",
+                    "created_at": "2016-11-17T10:03:20.342Z",
+                    "is_complete": false,
+                    "completed_at": "2016-11-17T15:03:20.342Z",
+                    "priority": "low",
+                    "remind_at_time": "2016-11-17T13:03:20.342Z",
+                    "remind_at_location": {
+                        "lat": 33.3632256,
+                        "lng": -117.0874871
+                    }
+                }
+            ]
+
+### Create a ToDo [POST]
+
+Create a ToDo.
+
++ Request (application/json)
+
+            {
+                "description": "Create a list of todo's",
+                "priority": "low",
+                "remind_at_time": "2016-11-17T13:03:20.342Z",
+                "remind_at_location": {
+                    "lat": 33.3632256,
+                    "lng": -117.0874871
+                }
+            }
+            
++ Response 201
+
+    + Headers
+    
+            Content-Type: application/json
+            Location: /todos/3
+        
+    + Body
+    
+            [
+                {
+                    "id": 3,
+                    "description": "Create a list of todo's",
+                    "created_at": "2016-11-17T10:03:20.342Z",
+                    "is_complete": false,
+                    "completed_at": "2016-11-17T15:03:20.342Z",
+                    "priority": "low",
+                    "remind_at_time": "2016-11-17T13:03:20.342Z",
+                    "remind_at_location": {
+                        "lat": 33.3632256,
+                        "lng": -117.0874871
+                    }
+                }
+            ]
+            
+### Update a ToDo [PUT]
+
+Update a ToDo.
+    
++ Request (application/json)
+    
+            {
+                "description": "Create a list of todo's",
+                "priority": "low",
+                "remind_at_time": "2016-11-17T13:03:20.342Z",
+                "remind_at_location": {
+                    "lat": 33.3632256,
+                    "lng": -117.0874871
+                }
+            }
+            
++ Response 200 (application/json)
+        
+    + Body
+        
+            [
+                {
+                    "id": 3,
+                    "description": "Create a list of todo's",
+                    "created_at": "2016-11-17T10:03:20.342Z",
+                    "is_complete": false,
+                    "completed_at": "2016-11-17T15:03:20.342Z",
+                    "priority": "low",
+                    "remind_at_time": "2016-11-17T13:03:20.342Z",
+                    "remind_at_location": {
+                        "lat": 33.3632256,
+                        "lng": -117.0874871
+                    }
+                }
+            ]
+
+### Delete a ToDo [DELETE]
+
+Delete a ToDo.
+
++ Response 204 (application/json)
