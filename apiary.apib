@@ -165,7 +165,7 @@ Create a ToDo.
                 }
             ]
 
-## Get, Add, Update a ToDo [/todos/{id}]
+## ToDo [/todos/{id}]
 
 ---
 
@@ -178,17 +178,13 @@ Get, add, update, delete ToDo's.
 | `id` | integer | ID of the ToDo |
 
 + Parameters
-    + id (required, number, `0`) ... ToDo id
+    + id: 0 (required, integer) ... ToDo id
 
 ### Get a ToDo [GET]
 
 Get a ToDo.
 
 + Response 200 (application/json)
-
-    ```
-    /todos/0
-    ```
 
     + Body
 
@@ -225,10 +221,6 @@ Update a ToDo.
             }
             
 + Response 200 (application/json)
-    
-    ```
-    /todos/3
-    ```
         
     + Body
         
