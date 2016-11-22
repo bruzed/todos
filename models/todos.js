@@ -1,6 +1,5 @@
 //	Get all todos
 exports.findAll = function(req, res) {
-	res.setHeader('Content-Type', 'application/json');
 	res.set({
 		'X-Pagination-Page': '1',
 		'X-Pagination-Limit': '10',
@@ -76,7 +75,8 @@ exports.findById = function(req, res) {
 
 // Create a todo
 exports.create = function(req, res) {
-	res.send(
+	res.set('Location', '/todos/3');
+	res.status(201).send(
 		[
             {
                 "id": 3,
@@ -118,7 +118,5 @@ exports.update = function(req, res) {
 
 //	Delete a todo
 exports.delete = function(req, res) {
-	// res.send({
-	//
-	// });
+	res.status(204).json();
 }
