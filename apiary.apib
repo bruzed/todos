@@ -72,7 +72,7 @@ Returns a list of ToDo's.
 
     + Headers
         
-            Content-Type: application/json
+            Content-Type: application/json; charset=utf-8
             X-Pagination-Page: 1
             X-Pagination-Limit: 10
             X-Pagination-Count: 5
@@ -144,7 +144,7 @@ Create a ToDo.
 
     + Headers
     
-            Content-Type: application/json
+            Content-Type: application/json; charset=utf-8
             Location: /todos/3
         
     + Body
@@ -184,7 +184,11 @@ Get, add, update, delete ToDo's.
 
 Get a ToDo.
 
-+ Response 200 (application/json)
++ Response 200
+    
+    + Headers
+        
+            Content-Type: application/json; charset=utf-8
 
     + Body
 
@@ -220,7 +224,11 @@ Update a ToDo.
                 }
             }
             
-+ Response 200 (application/json)
++ Response 200
+
+    + Headers
+        
+            Content-Type: application/json; charset=utf-8
         
     + Body
         
@@ -244,4 +252,8 @@ Update a ToDo.
 
 Delete a ToDo.
 
-+ Response 204 (application/json)
++ Response 204
+    
+    + Headers
+        
+            Content-Type: application/json; charset=utf-8
