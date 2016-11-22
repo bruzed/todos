@@ -13,8 +13,8 @@ app.get('/', function(req, res) {
 	res.json({message: 'Hello World!'});
 });
 
-app.get('/todos', todos.findAll);
-app.get('/todos/:id', todos.findById);
+app.get('/todos', todos.getAll);
+app.get('/todos/:id', todos.getById);
 app.post('/todos', todos.create);
 app.put('/todos/:id', todos.update);
 app.delete('/todos/:id', todos.delete);

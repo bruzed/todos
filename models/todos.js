@@ -1,5 +1,5 @@
 //	Get all todos
-exports.findAll = function(req, res) {
+exports.getAll = function(req, res) {
 	res.set({
 		'X-Pagination-Page': '1',
 		'X-Pagination-Limit': '10',
@@ -53,7 +53,7 @@ exports.findAll = function(req, res) {
 }
 
 //	Get a single todo
-exports.findById = function(req, res) {
+exports.getById = function(req, res) {
 	res.send(
 		[
             {
